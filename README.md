@@ -95,7 +95,7 @@ Create a systemd file to run the Flask app...
 vi /lib/systemd/system/thisisviewer.service
 ```
 
-Something like this should do the trick...
+Here is what mine looks like, adjust as needed...
 
 ```
 [Unit]
@@ -129,5 +129,44 @@ systemctl enable thisisviewer.service
 
 Now we can configure Apache to reverse proxy the Flask app so we can access the articles on port 80 and from another host. The Flask app should only listen on 127.0.0.1.
 
+```
+a2enmod proxy
+a2enmod proxy_http
+a2enmod proxy_ajp
+a2enmod rewrite
+a2enmod deflate
+a2enmod headers
+a2enmod proxy_balancer
+a2enmod proxy_connect
+a2enmod proxy_html
+vi /etc/apache2/sites-enabled/000-default.conf
+```
 
+Update the default virtualhost to reverse proxy to the Flask app, of course if you have more than 1 virtual host on the box your configs will look different.
 
+```
+<VirtualHost *>
+    ProxyPreserveHost On
+
+    # Servers to proxy the connection, or;
+    # List of application servers:
+    # Usage:
+    # ProxyPass / http://[IP Addr.]:[port]/
+    # ProxyPassReverse / http://[IP Addr.]:[port]/
+    # Example: 
+    ProxyPass / http://127.0.0.1:5000/
+    ProxyPassReverse / http://127.0.0.1:5000/
+
+    ServerName thisisscraper.robertputt.co.uk 
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+```
+
+Restart Apache...
+
+```
+service apache2 restart
+```
+
+Try visiting your webserver in your browser from another host. If all has gone well and the scraper cron has run for the first time you should see a nice plain text article listing.
