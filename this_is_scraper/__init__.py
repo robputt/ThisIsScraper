@@ -86,7 +86,9 @@ def extract_content(link):
     html_doc = requests.get(link)
     html_doc = html_doc.text
     soup = BeautifulSoup(html_doc, 'html.parser')
-    return html_doc.encode('utf-8')
+    title = soup.title.string
+    title = title.replace(' - Plymouth Herald', '')
+    return title, html_doc.encode('utf-8')
 
 
 def process_pending_articles(db_sess):
@@ -94,8 +96,9 @@ def process_pending_articles(db_sess):
     for article in pending_articles:
         logging.debug("Processing %s." % article.article_link)
         try:
-            content = extract_content(article.article_link)
+            title, content = extract_content(article.article_link)
             article.article_content = content
+            article.article_title = title
             article.article_status = 'complete'
         except:
             article.article_status = 'failed'
