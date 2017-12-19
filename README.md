@@ -54,6 +54,13 @@ cd ThisIsScraper
 pip install -r requirements.txt
 ```
 
+Create a new empty schema in your MySQL DB, don't worry the tables will be populated the first time the scraper cron runs.
+
+```
+mysql
+CREATE DATABASE thisisscraper;
+```
+
 Create the config.py file and update as required.
 
 ```
@@ -61,11 +68,66 @@ cp this_is_scraper/config.py.sample this_is_scraper/config.py
 vi this_is_scraper/config.py
 ```
 
-Install ThisIsScraper to your virtualenv.
+Install ThisIsScraper to your virtualenv (each time you update the config you'll need todo this, sorry I should have used some configfile parsing thing really!).
 
 ```
 python setup.py install
 ```
+
+Add the scraper script to cron...
+
+```
+mkdir /var/log/thisisscraper
+crontab -e
+```
+
+Something like this should do the trick...
+
+```
+*/5 * * * * /opt/thisisscraper/bin/python /home/user/ThisIsScraper/this_is_scraper/scraper.py > /var/log/thisisscraper/`date +\%Y\%m\%d\%H\%M\%S`-cron.log 2>&1
+```
+
+Carry on with the installation, but at the end check back in on the log directory to make sure that the scraper has pulled the articles as required...
+
+Create a systemd file to run the Flask app...
+
+```
+vi /lib/systemd/system/thisisviewer.service
+```
+
+Something like this should do the trick...
+
+```
+[Unit]
+Description=ThisIsScraperViewer
+After=network.target
+
+[Service]
+User=user
+ExecStart=/opt/thisisscraper/bin/python /home/user/ThisIsScraper/this_is_scraper/viewer.py
+WorkingDirectory=/home/user/ThisIsScraper/
+Restart=on-failure
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Now do a reload and try and start the service, if all is succesful a curl to localhost on port 5000 should send back some HTML...
+
+```
+systemctl daemon-reload
+systemctl start thisisviewer.service
+curl http://localhost:5000
+```
+
+If you get HTML back set the service to start at boot...
+
+```
+systemctl enable thisisviewer.service
+```
+
+Now we can configure Apache to reverse proxy the Flask app so we can access the articles on port 80 and from another host. The Flask app should only listen on 127.0.0.1.
 
 
 
