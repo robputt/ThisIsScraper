@@ -82,10 +82,24 @@ def get_pending_links(db_sess):
     return pending_articles
 
 
+def extract_content(link):
+    html_doc = requests.get(link)
+    html_doc = html_doc.text
+    soup = BeautifulSoup(html_doc, 'html.parser')
+    return html_doc.encode('utf-8')
+
+
 def process_pending_articles(db_sess):
     pending_articles = get_pending_links(db_sess)
     for article in pending_articles:
         logging.debug("Processing %s." % article.article_link)
+        try:
+            content = extract_content(article.article_link)
+            article.article_content = content
+            article.article_status = 'complete'
+        except:
+            article.article_status = 'failed'
+        db_sess.commit()
 
 
 def main():
