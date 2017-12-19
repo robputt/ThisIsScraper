@@ -15,12 +15,18 @@ As you can see the original site has alot of advertisements as highlighted in th
 ThisIsScraper site:
 ![ThisIsScraper site](https://github.com/robputt796/ThisIsScraper/blob/master/docs/thisisscraper.jpg?raw=true)
 
+## Demo
+
+You can view a demo of ThisIsScraper running here - http://95.138.162.109/
+
+## Limitations
+
+* This thing looks really ugly, but functional.
+* Only tested against ThisIsPlymouth.co.uk but probably works for other newspapers with ThisIs websites. 
+
 ## Requirements
 
 
 ## Installation
 
 
-## Demo
-
-You can view a demo of ThisIsScraper running here - http://95.138.162.109/ 
