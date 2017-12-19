@@ -6,6 +6,7 @@ import sys
 import logging
 import requests
 from bs4 import BeautifulSoup
+from this_is_scraper.db import init_db
 
 
 logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s',
@@ -17,8 +18,8 @@ def remove_duplicates(l):
     return list(set(l))
 
 
-def has_numbers(inputString):
-    return any(char.isdigit() for char in inputString)
+def has_numbers(input_str):
+    return any(char.isdigit() for char in input_str)
 
 
 def list_stories():
@@ -42,6 +43,8 @@ def list_stories():
 
 
 if __name__ == '__main__':
+    logging.info("Checking database...")
+    init_db()
     links = list_stories()
     logging.info("Found %s articles on news front page." % len(links))
 
