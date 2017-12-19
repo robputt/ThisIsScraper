@@ -9,4 +9,16 @@ The original site:
 As you can see the original site has alot of advertisements as highlighted in the green bounding boxes and dedicated very little screen space to the actual content... Here is the same article viewed in the ThisIsScraper viewer.
 
 ThisIsScraper site:
-![ThisIsScraper site](https://github.com/robputt796/ThisIsScraper/blob/master/docs/thisisscraper.jpg?raw=true) 
+![ThisIsScraper site](https://github.com/robputt796/ThisIsScraper/blob/master/docs/thisisscraper.jpg?raw=true)
+
+Just glorious text!
+
+## Requirements
+
+
+## Installation
+
+
+## Demo
+
+You can view a demo of ThisIsScraper running here - http://95.138.162.109/ 
