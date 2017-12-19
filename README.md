@@ -29,14 +29,43 @@ Feel free to raise a PR to fix any of the limitations above :-).
 
 ## Requirements
 
-* Host capable of running Python 3
+* Host capable of running Python 3 (probably works with Python 2.7 as well but I haven't tested this)
 * Internet connection to pull articles
 
-Tested with the following:
-
-* Debian 8
-* Python 3.4 (from OS packages)
-
 ## Installation
+
+Here is how I got ThisIsScraper running on Debian 8 on the demo box, if you are using a different operating system adjust as required.
+
+Clone the git repo...
+
+```
+git clone https://github.com/robputt796/ThisIsScraper.git
+```
+
+Install the Python pre-requisites and create a virtualenv.
+
+```
+apt-get install mysql-server apache2 libapache2-mod-proxy-html libxml2-dev python3 python3-dev python3-setuptools
+easy_install3 pip
+pip3 install virtualenv
+virtualenv /opt/thisisscraper
+source /opt/thisisscraper/bin/activate
+cd ThisIsScraper
+pip install -r requirements.txt
+```
+
+Create the config.py file and update as required.
+
+```
+cp this_is_scraper/config.py.sample this_is_scraper/config.py
+vi this_is_scraper/config.py
+```
+
+Install ThisIsScraper to your virtualenv.
+
+```
+python setup.py install
+```
+
 
 
