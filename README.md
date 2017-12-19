@@ -23,9 +23,19 @@ You can view a demo of ThisIsScraper running here - http://95.138.162.109/
 
 * This thing looks really ugly, but functional.
 * Only tested against ThisIsPlymouth.co.uk but probably works for other newspapers with ThisIs websites. 
+* Currently doesn't pull any images or video content related to the article.
+
+Feel free to raise a PR to fix any of the limitations above :-).
 
 ## Requirements
 
+* Host capable of running Python 3
+* Internet connection to pull articles
+
+Tested with the following:
+
+* Debian 8
+* Python 3.4 (from OS packages)
 
 ## Installation
 
