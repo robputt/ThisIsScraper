@@ -1,0 +1,12 @@
+<html>
+<head>
+	<title>ThisIsScraper &middot {{ article.article_title }}</title>
+</head>
+<body>
+	<h2>ThisIsScraper &middot; Article Viewer</h2>
+	<p><a href='/'>&lt; Back</a></p>
+	<h3>{{ article.article_title }}</h3>
+	<p>{{ article.article_dt.isoformat() }}</p>
+	<p>{{ article.article_content|safe }}</p>
+</body>
+</html>

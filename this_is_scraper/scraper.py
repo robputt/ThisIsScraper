@@ -90,7 +90,7 @@ def extract_content(link):
         paragraphs = div.findAll("p")
     ret_text = ""
     for paragraph in paragraphs:
-        ret_text += "%s \r\n\r\n" % paragraph.get_text().strip()
+        ret_text += "%s <br/><br/>" % paragraph.get_text().strip()
     return title, ret_text.encode('utf-8')
 
 

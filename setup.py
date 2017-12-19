@@ -27,5 +27,6 @@ setup(
     # Adds dependencies
     install_requires = ['bs4',
                         'sqlalchemy',
-                        'pymysql']
+                        'pymysql',
+                        'flask']
 )
