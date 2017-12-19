@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>ThisIsScraper Article Viewer</title>
+</head>
+<body>
+	<h2>ThisIsScraper &middot; Article Viewer</h2>
+	<table style='width:100%;'>
+		<thead>
+			<tr>
+				<th>Article Date</th>
+				<th>Article Title</th>
+				<th>Scrape Status</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for article in articles %}
+				<tr>
+					<td>{{ article.article_dt.isoformat() }}</td>
+					<td>{{ article.article_title }}</td>
+					{% if article.article_status == 'complete' %}
+						<td bgcolor='lime'>{{ article.article_status }}</td>
+					{% elif article.article_status == 'pending' %}
+						<td bgcolor='orange'>{{ article.article_status }}</td>
+					{% elif article.article_status == 'failed' %}
+						<td bgcolor='red'>{{ article.article_status }}</td>
+					{% else %}
+						<td>{{ article.article_status }}</td>
+					{% endif %}
+					<td>{% if article.article_status == 'complete' %}<a href='/view'>View Summary</a> &middot; {% endif %}<a href='{{ article.article_link }}' target='_blank'>View Original</a></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>

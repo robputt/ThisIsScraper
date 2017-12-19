@@ -119,6 +119,7 @@ def main():
     logging.info("%s new articles added to DB." % added)
     logging.info("Fetching pending articles.")
     process_pending_articles(db_sess)
+    logging.info("Done!")
 
 
 if __name__ == '__main__':
