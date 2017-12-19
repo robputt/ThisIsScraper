@@ -1,9 +1,16 @@
 '''
     Scraper for ThisIsPlymouth.co.uk news stories.
 '''
-import requests
 import re
+import sys
+import logging
+import requests
 from bs4 import BeautifulSoup
+
+
+logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s',
+                    level=logging.INFO,
+                    stream=sys.stdout)
 
 
 def remove_duplicates(l):
@@ -36,6 +43,5 @@ def list_stories():
 
 if __name__ == '__main__':
     links = list_stories()
-    print("Found %s articles on news front page." % len(links))
-    for link in links:
-        print(link)
+    logging.info("Found %s articles on news front page." % len(links))
+
