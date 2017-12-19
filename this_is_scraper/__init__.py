@@ -26,9 +26,6 @@ def has_numbers(input_str):
 
 
 def list_stories():
-    '''
-        Fetches a list of links to articles currently on the news front page.
-    '''
     article_links = []
     html_doc = requests.get('http://www.plymouthherald.co.uk/news/')
     soup = BeautifulSoup(html_doc.text, 'html.parser')
