@@ -17,6 +17,7 @@ class Articles(BASE):
     article_link = Column(String(250), primary_key=True, nullable=False)
     article_dt = Column(DateTime(), nullable=False)
     article_status = Column(String(20), nullable=False)
+    article_title = Column(String(150), nullable=True)
     article_content = Column(UnicodeText(), nullable=True)
 
 
