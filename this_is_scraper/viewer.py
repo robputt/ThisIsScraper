@@ -44,10 +44,8 @@ def display_article_list():
 def display_article():
     url = request.args.get('url')
     article = get_article(url)
-    content = article.article_content.replace('\r\n', '<br/>')
     return render_template('view_article.html',
-                           article=article,
-                           content=content)
+                           article=article)
 
 
 if __name__ == "__main__":
