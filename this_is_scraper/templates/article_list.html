@@ -17,7 +17,12 @@
 			{% for article in articles %}
 				<tr>
 					<td>{{ article.article_dt.isoformat() }}</td>
-					<td>{% if article.article_status == 'complete' %}<a href='/view?url={{ article.article_link }}'>{{ article.article_title }}</a>{%else%}{{ article.article_title }}{%endif%}</td>
+					<td>{% if article.article_status == 'complete' %}
+							<a href='/view?url={{ article.article_link }}'>{{ article.article_title }}</a>
+						{% else %}
+							{{ article.article_title }}
+						{%endif%}
+					</td>
 					{% if article.article_status == 'complete' %}
 						<td bgcolor='lime'>{{ article.article_status }}</td>
 					{% elif article.article_status == 'pending' %}
