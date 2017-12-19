@@ -88,7 +88,13 @@ def extract_content(link):
     soup = BeautifulSoup(html_doc, 'html.parser')
     title = soup.title.string
     title = title.replace(' - Plymouth Herald', '')
-    return title, html_doc.encode('utf-8')
+    article_div = soup.findAll("div", {"class":"article-body"})
+    for div in article_div:
+        paragraphs = div.findAll("p")
+    ret_text = ""
+    for paragraph in paragraphs:
+        ret_text += "%s \r\n\r\n" % paragraph.get_text().strip()
+    return title, ret_text.encode('utf-8')
 
 
 def process_pending_articles(db_sess):
