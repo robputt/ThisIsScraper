@@ -32,7 +32,7 @@
 					{% else %}
 						<td>{{ article.article_status }}</td>
 					{% endif %}
-					<td>{% if article.article_status == 'complete' %}<a href='/view?url={{ article.article_link }}'>View Summary</a> &middot; {% endif %}<a href='{{ article.article_link }}' target='_blank'>View Original</a></td>
+					<td><a href='{{ article.article_link }}' target='_blank'>View Original</a></td>
 				</tr>
 			{% endfor %}
 		</tbody>
