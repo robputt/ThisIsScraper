@@ -4,7 +4,7 @@
 </head>
 <body>
 	<h2>ThisIsScraper &middot; Article Viewer</h2>
-	<p><a href='/'>&lt; Back</a></p>
+	<p><a href='/'>&lt; Back</a> &middot; <a href='{{ article.article_link }}' target='_blank'>View Original</a></p>
 	<h3>{{ article.article_title }}</h3>
 	<p>{{ article.article_dt.isoformat() }}</p>
 	<p>{{ article.article_content|safe }}</p>
