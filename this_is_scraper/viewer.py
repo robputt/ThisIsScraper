@@ -1,4 +1,3 @@
-import base64
 from flask import Flask
 from flask import g
 from flask import render_template
@@ -45,10 +44,8 @@ def display_article_list():
 def display_article():
     url = request.args.get('url')
     article = get_article(url)
-    content = base64.b64decode(article.article_content)
     return render_template('view_article.html',
-                           article=article,
-                           content=content)
+                           article=article)
 
 
 if __name__ == "__main__":
