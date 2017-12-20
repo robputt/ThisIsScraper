@@ -6,6 +6,7 @@ import sys
 import logging
 import requests
 import datetime
+import base64
 from bs4 import BeautifulSoup
 from this_is_scraper.db import init_db
 from this_is_scraper.db import get_db_session
@@ -100,7 +101,7 @@ def process_pending_articles(db_sess):
         logging.debug("Processing %s." % article.article_link)
         try:
             title, content = extract_content(article.article_link)
-            article.article_content = content
+            article.article_content = base64.b64encode(content)
             article.article_title = title
             article.article_status = 'complete'
         except:

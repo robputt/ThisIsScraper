@@ -7,6 +7,6 @@
 	<p><a href='/'>&lt; Back</a> &middot; <a href='{{ article.article_link }}' target='_blank'>View Original</a></p>
 	<h3>{{ article.article_title }}</h3>
 	<p>{{ article.article_dt.isoformat() }}</p>
-	<p>{{ article.article_content|safe }}</p>
+	<p>{{ content|safe }}</p>
 </body>
 </html>
